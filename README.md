@@ -1,3 +1,10 @@
+# Nitter — Railway RSS
+
+**Railway kurulumu (Türkçe): [RAILWAY.md](RAILWAY.md)**
+
+Railway bu depodaki `railway.json` ve `Dockerfile.railway` dosyalarını kullanır.
+RSS açıktır; aynı projede Redis ve Railway Variables içinde geçerli X oturum çerezleri gerekir.
+
 # Nitter
 
 > [!NOTE]

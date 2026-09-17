@@ -18,3 +18,7 @@ dump.rdb
 nimbledeps/
 nimble.paths
 nimble.develop
+.env
+.env.*
+runtime/
+__pycache__/

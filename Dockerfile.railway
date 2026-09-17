@@ -1,0 +1,21 @@
+FROM nimlang/nim:2.2.6-alpine-regular AS build
+RUN apk --no-cache add libsass-dev pcre
+WORKDIR /src/nitter
+COPY nitter.nimble ./
+RUN nimble install -y --depsOnly
+COPY . .
+RUN nimble build -d:danger -d:lto -d:strip --mm:refc \
+    && nimble scss && nimble md
+
+FROM alpine:3.23
+RUN apk --no-cache add pcre ca-certificates openssl python3 \
+    && adduser -D -h /src nitter
+WORKDIR /src
+COPY --from=build /src/nitter/nitter ./nitter
+COPY --from=build /src/nitter/public ./public
+COPY nitter.example.conf ./nitter.example.conf
+COPY railway/entrypoint.py ./entrypoint.py
+RUN mkdir /src/runtime && chown nitter:nitter /src/runtime
+USER nitter
+EXPOSE 8080
+ENTRYPOINT ["python3", "/src/entrypoint.py"]

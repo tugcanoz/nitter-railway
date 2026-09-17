@@ -1,6 +1,16 @@
 *.png
 *.md
+!public/md/*.md
 LICENSE
 docker-compose.yml
 Dockerfile
 tests/
+.git
+.github
+.env
+.env.*
+nitter.conf
+sessions.json*
+guest_accounts.json*
+runtime/
+**/__pycache__/
